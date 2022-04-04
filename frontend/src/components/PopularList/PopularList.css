@@ -1,0 +1,22 @@
+.PopularList_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.PopularList_element {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.PopularList_mov_title {
+  font-size: 20px;
+  height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

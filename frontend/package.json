@@ -1,0 +1,138 @@
+{
+  "name": "react-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react-app": "^6.2.2",
+    "prettier": "^2.5.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app/jest",
+      "eslint:recommended",
+      "react-app",
+      "plugin:jsx-a11y/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "root": true,
+    "plugins": [
+      "import",
+      "jsx-a11y",
+      "prettier"
+    ],
+    "rules": {
+      "curly": [
+        "error",
+        "all"
+      ],
+      "eqeqeq": [
+        "error",
+        "smart"
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
+      ],
+      "no-shadow": [
+        "error",
+        {
+          "hoist": "all"
+        }
+      ],
+      "prefer-const": "error",
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            [
+              "external",
+              "builtin"
+            ],
+            "internal",
+            [
+              "parent",
+              "sibling",
+              "index"
+            ]
+          ]
+        }
+      ],
+      "sort-imports": [
+        "error",
+        {
+          "ignoreCase": true,
+          "ignoreDeclarationSort": true,
+          "ignoreMemberSort": false,
+          "memberSyntaxSortOrder": [
+            "none",
+            "all",
+            "multiple",
+            "single"
+          ]
+        }
+      ],
+      "padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": "*",
+          "next": "return"
+        }
+      ],
+      "react/no-string-refs": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "prettier/prettier": "error"
+    },
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
