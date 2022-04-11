@@ -4,6 +4,7 @@ const cors = require("cors");
 const typeorm = require("typeorm");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const moviesRouter = require("./routes/movies.js");
 const routeNotFoundJsonHandler = require("./services/routeNotFoundJsonHandler");
 const jsonErrorHandler = require("./services/jsonErrorHandler");
 
@@ -18,6 +19,7 @@ typeorm.createConnection().then(() => {
   // Register routes
   app.use("/", indexRouter);
   app.use("/users", usersRouter);
+  app.use("/movies", moviesRouter);
 
   // Register 404 middleware and error handler
   app.use(routeNotFoundJsonHandler); // this middleware must be registered after all routes to handle 404 correctly

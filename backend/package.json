@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "dotenv nodemon ./server.js",
+    "debug": "dotenv nodemon --inspect ./server.js",
     "start": "dotenv node ./server.js",
     "lint": "eslint . --fix",
     "migration:generate": "typeorm migration:generate --outputJs",
@@ -16,6 +17,7 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "pg": "^8.7.3",
+    "axios": "^0.26.1",
     "typeorm": "^0.2.45"
   },
   "devDependencies": {

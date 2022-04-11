@@ -1,5 +1,5 @@
 const express = require("express");
-const { getRepository} = require("typeorm");
+const { getRepository } = require("typeorm");
 const User = require("../entities/user");
 const router = express.Router();
 
@@ -36,7 +36,7 @@ router.post("/new", function (req, res) {
     });
 });
 
-router.delete("/:userId", function (req, res) {
+router.delete("/delete/:userId", function (req, res) {
   getRepository(User)
     .delete({ id: req.params.userId })
     .then(function () {
