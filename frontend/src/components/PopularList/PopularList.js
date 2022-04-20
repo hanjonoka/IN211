@@ -3,6 +3,13 @@ import axios from 'axios';
 
 import './PopularList.css';
 
+const DEFAULT_FORM_VALUES = {
+  field: '',
+  order: '',
+  offset: '',
+  limit: '',
+};
+
 function PopularList() {
   const [movies, setMovies] = useState([]);
   const [orderField, setOrderField] = useState('');
