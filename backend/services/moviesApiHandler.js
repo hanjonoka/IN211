@@ -20,7 +20,9 @@ const moviesListHandler = async function (req, res) {
     take: limit,
     order: {},
   };
-  if (req.query.field) filter.order[req.query.field] = order;
+  req.query.field
+    ? (filter.order[req.query.field] = order)
+    : (filter.order["title"] = order);
   let moviesList = await movieRepository.find(filter);
 
   res.status(200).json(moviesList);
