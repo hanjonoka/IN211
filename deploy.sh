@@ -2,7 +2,8 @@
 cd frontend
 npm run build
 cd ..
-cp -r frontend/build/* backend/public/
+rm -rf backend/public
+cp -R frontend/build/ backend/public/
 git add *
-git commit -m "copied front build to back"
+git commit -m "Deploy new version"
 git push heroku
