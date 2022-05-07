@@ -9,5 +9,5 @@ echo "copy build to backend/public..."
 cp -R frontend/build/ backend/public/
 echo "done"
 git add *
-git commit -m "New prod version"
-git push heroku
+git commit -m "New dev version"
+git push
