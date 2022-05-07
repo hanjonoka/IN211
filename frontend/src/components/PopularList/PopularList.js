@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import './PopularList.css';
 
+import MovieList from '../MovieList/MovieList';
+
 const DEFAULT_FORM_VALUES = {
   field: 'title',
   order: 'ASC',
@@ -17,7 +19,7 @@ function PopularList() {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_BACKDEND_URL}/movies/list?field=${formValues.field}&order=${formValues.order}&offset=${formValues.offset}&limit=${formValues.limit}`
+        `${process.env.REACT_APP_BACKEND_URL}/movies/list?field=${formValues.field}&order=${formValues.order}&offset=${formValues.offset}&limit=${formValues.limit}`
       )
       .then((response) => {
         console.log(response.data);
@@ -58,14 +60,7 @@ function PopularList() {
         </select>
       </form>
 
-      <div className="PopularList_container">
-        {movies.map((m) => (
-          <div className="PopularList_element" key={m.title + '_poplist_div'}>
-            <img src={m.poster_url} alt="affiche du film"></img>
-            <div className="PopularList_mov_title">{m.title}</div>
-          </div>
-        ))}
-      </div>
+      <MovieList movies={movies} />
 
       <button
         name="load_more_button"

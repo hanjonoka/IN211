@@ -14,6 +14,10 @@ router.get("/", function (req, res) {
 
 router.get("/list", (req, res) => moviesHandler.moviesListHandler(req, res));
 
+router.get("/search", (req, res) =>
+  moviesHandler.moviesSearchListHandler(req, res)
+);
+
 router.post("/new", function (req, res) {
   const movieRepository = getRepository(Movie);
   const newMovie = movieRepository.create({

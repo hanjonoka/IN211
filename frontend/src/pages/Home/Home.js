@@ -1,20 +1,15 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
 import logo from './logo.svg';
 import './Home.css';
 
 import PopularList from '../../components/PopularList/PopularList';
+import SearchMovieForm from '../../components/SearchMovie/SearchMovieForm/SearchMovieForm';
 
 function Home() {
-  const [movieName, setMovieName] = useState(null);
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <PopularList />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -27,6 +22,8 @@ function Home() {
           Learn React
         </a>
       </header>
+      <SearchMovieForm />
+      <PopularList />
     </div>
   );
 }

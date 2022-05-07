@@ -26,8 +26,19 @@ const moviesListHandler = async function (req, res) {
   let moviesList = await movieRepository.find(filter);
 
   res.status(200).json(moviesList);
+};
 
-  movieRepository.find();
+const moviesSearchListHandler = async function (req, res) {
+  let movieRepository = getRepository(Movie);
+  let moviesList = await movieRepository
+    .createQueryBuilder()
+    .where("UPPER(title) LIKE UPPER(:search)", {
+      search: "%" + req.query.search + "%",
+    })
+    .orderBy("title")
+    .getMany();
+
+  res.status(200).json(moviesList);
 };
 
 const populate = async function (req, res) {
@@ -64,3 +75,4 @@ const populate = async function (req, res) {
 
 module.exports.moviesListHandler = moviesListHandler;
 module.exports.populate = populate;
+module.exports.moviesSearchListHandler = moviesSearchListHandler;
