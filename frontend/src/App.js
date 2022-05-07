@@ -6,6 +6,7 @@ import { Root } from './components/Root/Root';
 import Counter from './pages/Counter/Counter';
 import Users from './pages/Users/Users';
 import Search from './pages/Search/Search';
+import AddMovie from './pages/AddMovie/AddMovie';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
         <Route path="search/:search" element={<Search />} />
+        <Route path="addMovie" element={<AddMovie />} />
       </Routes>
     </Root>
   );

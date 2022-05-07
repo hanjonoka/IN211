@@ -41,6 +41,54 @@ const moviesSearchListHandler = async function (req, res) {
   res.status(200).json(moviesList);
 };
 
+const addMovieHandler = async function (req, res) {
+  const movieRepository = getRepository(Movie);
+
+  if (req.body.tmdb_id === "") {
+    const newMovie = movieRepository.create({
+      title: req.body.title,
+      date: req.body.date,
+      poster_url: req.body.poster_url,
+    });
+
+    movieRepository
+      .insert(newMovie)
+      .then(function (newDocument) {
+        res.status(201).json(newDocument);
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error while creating the movie." });
+      });
+  }
+  axios
+    .get(`https://api.themoviedb.org/3/movie/${req.body.tmdb_id}`, {
+      params: { api_key: "a0a7e40dc8162ed7e37aa2fc97db5654" },
+    })
+    .then((response) => {
+      const movieRepository = getRepository(Movie);
+      const newMovie = movieRepository.create({
+        title: response.data.original_title,
+        release_date: response.data.release_date,
+        poster_url:
+          "https://image.tmdb.org/t/p/w200" + response.data.poster_path,
+      });
+      movieRepository
+        .insert(newMovie)
+        .then(function (newDocument) {
+          res.status(201).json(newDocument);
+        })
+        .catch(function (error) {
+          console.log(error);
+          res.status(500).json({ message: "Error while creating the movie!" });
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: "error while creating movie" });
+    });
+};
+
 const populate = async function (req, res) {
   let movieRepository = getRepository(Movie);
   for (let i = 1; i < 21; i++) {
@@ -76,3 +124,4 @@ const populate = async function (req, res) {
 module.exports.moviesListHandler = moviesListHandler;
 module.exports.populate = populate;
 module.exports.moviesSearchListHandler = moviesSearchListHandler;
+module.exports.addMovieHandler = addMovieHandler;

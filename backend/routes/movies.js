@@ -18,22 +18,7 @@ router.get("/search", (req, res) =>
   moviesHandler.moviesSearchListHandler(req, res)
 );
 
-router.post("/new", function (req, res) {
-  const movieRepository = getRepository(Movie);
-  const newMovie = movieRepository.create({
-    title: req.body.title,
-    release_date: req.body.release_date,
-  });
-
-  movieRepository
-    .insert(newMovie)
-    .then(function (newDocument) {
-      res.status(201).json(newDocument);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-});
+router.post("/new", (req, res) => moviesHandler.addMovieHandler(req, res));
 
 router.delete("/delete/:movieId", function (req, res) {
   getRepository(Movie)
