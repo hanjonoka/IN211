@@ -8,7 +8,7 @@ const useFetchUsers = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKDEND_URL}/users`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/users`)
       .then((response) => {
         setUsers(response.data.users);
       })
