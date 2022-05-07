@@ -49,6 +49,7 @@ const addMovieHandler = async function (req, res) {
       title: req.body.title,
       date: req.body.date,
       poster_url: req.body.poster_url,
+      overview: req.body.overview,
     });
 
     movieRepository
@@ -72,6 +73,7 @@ const addMovieHandler = async function (req, res) {
         release_date: response.data.release_date,
         poster_url:
           "https://image.tmdb.org/t/p/w200" + response.data.poster_path,
+        overview: response.data.overview,
       });
       movieRepository
         .insert(newMovie)
@@ -104,6 +106,7 @@ const populate = async function (req, res) {
               title: m.original_title,
               release_date: m.release_date ? m.release_date : null,
               poster_url: "https://image.tmdb.org/t/p/w200" + m.poster_path,
+              overview: m.overview,
             })
           );
         });

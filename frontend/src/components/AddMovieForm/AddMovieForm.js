@@ -6,6 +6,7 @@ const DEFAULT_FORM_VALUES = {
   release_date: '',
   poster_url: '',
   tmdb_id: '',
+  overview: '',
 };
 
 const useSaveMovie = () => {
@@ -71,6 +72,15 @@ function AddMovieForm() {
           value={formValues.poster_url}
           onChange={(event) =>
             setFormValues({ ...formValues, poster_url: event.target.value })
+          }
+        ></input>
+        <input
+          type="text"
+          className="addMovieInput"
+          placeholder="Movie Overview"
+          value={formValues.overview}
+          onChange={(event) =>
+            setFormValues({ ...formValues, overview: event.target.value })
           }
         ></input>
         <input

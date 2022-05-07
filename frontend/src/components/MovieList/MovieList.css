@@ -1,4 +1,5 @@
 .MovieList_element {
+  cursor: pointer;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -19,4 +20,8 @@
   height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.popup-details {
+  width: 90%;
 }
