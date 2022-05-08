@@ -9,7 +9,7 @@ const DEFAULT_FORM_VALUES = {
   field: 'mean_mark',
   order: 'DESC',
   offset: 0,
-  limit: 10,
+  limit: 50,
 };
 
 function PopularList() {
@@ -31,23 +31,22 @@ function PopularList() {
   }, [formValues]);
 
   return (
-    <div>
+    <div className="mainList_container">
       <form className="select_critere_form">
-        <label for="field_select">
-          Order By:
-          <select
-            name="field"
-            id="field_select"
-            value={formValues.field}
-            onChange={(event) =>
-              setFormValues({ ...formValues, field: event.target.value })
-            }
-          >
-            <option value="title">Titre</option>
-            <option value="release_date">Date</option>
-            <option value="mean_mark">Note</option>
-          </select>
-        </label>
+        <div>Order By :</div>
+        <select
+          name="field"
+          id="field_select"
+          value={formValues.field}
+          onChange={(event) =>
+            setFormValues({ ...formValues, field: event.target.value })
+          }
+        >
+          <option value="title">title</option>
+          <option value="release_date">Date</option>
+          <option value="mean_mark">Score</option>
+        </select>
+
         <select
           name="order"
           id="order_select"
@@ -56,8 +55,8 @@ function PopularList() {
             setFormValues({ ...formValues, order: event.target.value })
           }
         >
-          <option value="ASC">Croissant</option>
-          <option value="DESC">Décroissant</option>
+          <option value="ASC">Increasing</option>
+          <option value="DESC">Decreasing</option>
         </select>
       </form>
 
@@ -69,7 +68,7 @@ function PopularList() {
         onClick={() =>
           setFormValues({
             ...formValues,
-            limit: formValues.limit + 10,
+            limit: formValues.limit + 20,
           })
         }
       >

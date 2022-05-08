@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import './SearchMovieForm.css';
 
 function SearchMovieForm(props) {
   const [movie, setMovie] = useState(props.movie);
 
   return (
-    <div>
+    <div className="search-form-container">
+      <div>Search Movie</div>
       <form className="searchMovieForm" action={'/search/' + movie}>
         <input
           className="searchMoVieInput"

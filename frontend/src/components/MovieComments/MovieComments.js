@@ -58,7 +58,7 @@ function MovieComments(props) {
 
   const DEFAULT_FORM_VALUES = {
     comment: '',
-    mark: '',
+    mark: '0',
     user_id: cookies.userId,
     movie_id: props.movie.id,
   };
@@ -77,7 +77,7 @@ function MovieComments(props) {
         {comments.map((c) => (
           <div className="comment" key={c.user_id}>
             <div className="comment-name">{c.firstname + ' ' + c.lastname}</div>
-            <div className="comment-mark">{c.mark}</div>
+            <div className="comment-score">Score : {c.mark}</div>
             <div className="comment-text">{c.text}</div>
           </div>
         ))}
@@ -95,29 +95,38 @@ function MovieComments(props) {
           getComments(props.movie.id, setComments);
         }}
       >
-        <input
-          type="text"
-          placeholder="comment"
-          value={formValues.comment}
-          onChange={(event) =>
-            setFormValues({ ...formValues, comment: event.target.value })
-          }
-        ></input>
-        <select
-          name="mark"
-          value={formValues.mark}
-          onChange={(event) =>
-            setFormValues({ ...formValues, mark: event.target.value })
-          }
-        >
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <button type="submit">Send</button>
+        <div className="fields-comment-form">
+          <div className="score-comment-form">
+            <span className="score-comment-label">Score : </span>
+            <select
+              className="score-comment-select"
+              name="mark"
+              value={formValues.mark}
+              onChange={(event) =>
+                setFormValues({ ...formValues, mark: event.target.value })
+              }
+            >
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <textarea
+            className="comment-textarea"
+            placeholder="comment"
+            value={formValues.comment}
+            onChange={(event) =>
+              setFormValues({ ...formValues, comment: event.target.value })
+            }
+          ></textarea>
+        </div>
+        <button className="submit-comment" type="submit">
+          Send
+        </button>
+
         <input type="hidden" value={formValues.movie_id}></input>
         <input type="hidden" value={formValues.user_id}></input>
       </form>

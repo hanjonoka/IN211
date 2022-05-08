@@ -3,16 +3,24 @@
   background-color: #292d3e;
   color: #ffffff;
   max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 20px;
 }
 .header-modal-details {
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid gray;
   font-size: 18px;
   text-align: center;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.content-modal-details {
-  padding: 10px 5px;
-  border-radius: 5px;
+.overview-modal-details {
+  max-height: 200px;
+  overflow-y: auto;
 }
 .actions-modal-details {
   padding: 10px 5px;
