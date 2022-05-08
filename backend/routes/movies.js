@@ -2,6 +2,7 @@ const express = require("express");
 const moviesHandler = require("../services/moviesApiHandler.js");
 const { getRepository } = require("typeorm");
 const Movie = require("../entities/movie");
+const auth = require("../middleware/auth.js");
 const router = express.Router();
 
 router.get("/", function (req, res) {
@@ -30,6 +31,12 @@ router.delete("/delete/:movieId", function (req, res) {
       res.status(500).json({ message: "Error while deleting the movie" });
     });
 });
+
+router.post("/addComment", auth, (req, res) =>
+  moviesHandler.addComment(req, res)
+);
+
+router.get("/getComments", (req, res) => moviesHandler.getComments(req, res));
 
 router.post("/populate", (req, res) => moviesHandler.populate(req, res));
 

@@ -1,6 +1,8 @@
 const { getRepository } = require("typeorm");
 const Movie = require("../entities/movie");
 const axios = require("axios");
+const Comment = require("../entities/comment");
+const User = require("../entities/user");
 
 /*
 API parameters : offset, limit, field, order(ASC|DESC)
@@ -91,6 +93,52 @@ const addMovieHandler = async function (req, res) {
     });
 };
 
+const addComment = async function (req, res) {
+  const commentRepository = getRepository(Comment);
+  const newComment = commentRepository.create({
+    mark: req.body.mark,
+    user_id: req.body.user_id,
+    movie_id: req.body.movie_id,
+  });
+
+  let comments = await commentRepository
+    .createQueryBuilder()
+    .select()
+    .where("movie_id = :movie_id", { movie_id: req.query.movie_id })
+    .andWhere("user_id = :user_id", { user_id: req.query.user_id })
+    .getMany();
+  if (comments.length > 0) {
+    res.status(500).json({ message: "already commented" });
+  }
+
+  commentRepository
+    .insert(newComment)
+    .then(function (newDocument) {
+      res.status(201).json(newDocument);
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error while creating comment" });
+    });
+};
+
+const getComments = async function (req, res) {
+  const commentRepository = getRepository(Comment);
+  console.log(req.query);
+
+  let comments = await commentRepository
+    .createQueryBuilder()
+    .select("*")
+    .from(User, "user")
+    .where("comment.movie_id = :movie_id", {
+      movie_id: req.query.movie_id,
+    })
+    .andWhere("user.id = comment.user_id")
+    .getRawMany();
+
+  res.status(200).json(comments);
+};
+
 const populate = async function (req, res) {
   let movieRepository = getRepository(Movie);
   for (let i = 1; i < 21; i++) {
@@ -128,3 +176,5 @@ module.exports.moviesListHandler = moviesListHandler;
 module.exports.populate = populate;
 module.exports.moviesSearchListHandler = moviesSearchListHandler;
 module.exports.addMovieHandler = addMovieHandler;
+module.exports.addComment = addComment;
+module.exports.getComments = getComments;

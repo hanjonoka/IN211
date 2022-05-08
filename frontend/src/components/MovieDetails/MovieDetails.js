@@ -1,3 +1,4 @@
+import MovieComments from '../MovieComments/MovieComments';
 import './MovieDetails.css';
 
 function MovieDetails(props) {
@@ -12,6 +13,7 @@ function MovieDetails(props) {
         Release date : {props.movie.release_date}{' '}
       </div>
       <div className="content-modal-details"> {props.movie.overview}</div>
+      <MovieComments className="content-modal-details" movie={props.movie} />
       <div className="actions-modal-details">
         <button className="button"> Delete Movie </button>
         <button

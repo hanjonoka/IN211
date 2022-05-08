@@ -1,0 +1,13 @@
+.comment-section {
+  max-height: 800px;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.add-comment-form {
+  display: block;
+}

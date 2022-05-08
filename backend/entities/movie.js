@@ -6,7 +6,7 @@ const Movie = new typeorm.EntitySchema({
     id: {
       primary: true,
       generated: "uuid",
-      type: String,
+      type: "uuid",
     },
     title: {
       type: String,
@@ -23,6 +23,14 @@ const Movie = new typeorm.EntitySchema({
     poster_url: {
       type: String,
       unique: false,
+    },
+  },
+  relations: {
+    comments: {
+      type: "one-to-many",
+      target: "comment",
+      cascade: true,
+      inverseSide: "movie",
     },
   },
 });

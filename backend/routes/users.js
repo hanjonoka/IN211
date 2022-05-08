@@ -13,6 +13,19 @@ router.get("/", function (req, res) {
     });
 });
 
+router.get("/getById", function (req, res) {
+  getRepository(User)
+    .findOne({ where: { id: req.query.id } })
+    .then((response) => {
+      console.log(response);
+      res.status(200).json(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: "could not fetch user" });
+    });
+});
+
 router.post("/new", async function (req, res) {
   const userRepository = getRepository(User);
   const pwd_hash = await bcrypt.hash(req.body.password, 10);

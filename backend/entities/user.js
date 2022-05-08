@@ -1,12 +1,12 @@
 const typeorm = require("typeorm");
 
 const User = new typeorm.EntitySchema({
-  name: "User",
+  name: "user",
   columns: {
     id: {
       primary: true,
       generated: "uuid",
-      type: String,
+      type: "uuid",
     },
     email: {
       type: String,
@@ -17,6 +17,14 @@ const User = new typeorm.EntitySchema({
     pwd_hash: {
       type: String,
       nullable: false,
+    },
+  },
+  relations: {
+    comments: {
+      type: "one-to-many",
+      target: "comment",
+      cascade: true,
+      inverseSide: "user",
     },
   },
 });
