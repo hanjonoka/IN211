@@ -7,7 +7,7 @@ import MovieList from '../MovieList/MovieList';
 
 const DEFAULT_FORM_VALUES = {
   field: 'mean_mark',
-  order: 'DSC',
+  order: 'DESC',
   offset: 0,
   limit: 10,
 };
