@@ -6,6 +6,7 @@ const DEFAULT_FORM_VALUES = {
   email: '',
   firstname: '',
   lastname: '',
+  password: '',
 };
 
 const useSaveUser = () => {
@@ -79,8 +80,17 @@ function AddUserForm() {
             setFormValues({ ...formValues, lastname: event.target.value })
           }
         />
+        <input
+          className="add-user-input"
+          type="password"
+          placeholder="password"
+          value={formValues.password}
+          onChange={(event) =>
+            setFormValues({ ...formValues, password: event.target.value })
+          }
+        />
         <button className="add-user-button" type="submit">
-          Add user
+          Signup
         </button>
       </form>
       {userCreationSuccess !== null && (

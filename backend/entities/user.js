@@ -14,6 +14,10 @@ const User = new typeorm.EntitySchema({
     },
     firstname: { type: String },
     lastname: { type: String },
+    pwd_hash: {
+      type: String,
+      nullable: false,
+    },
   },
 });
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import AccountButtons from './AccountButtons/AccountButtons';
 import './Header.css';
 
 const Header = () => {
@@ -23,6 +24,7 @@ const Header = () => {
       <Link className="Link" to="/addMovie">
         Add Movie
       </Link>
+      <AccountButtons />
     </div>
   );
 };

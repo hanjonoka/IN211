@@ -2,6 +2,8 @@ const express = require("express");
 const { getRepository } = require("typeorm");
 const User = require("../entities/user");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 router.get("/", function (req, res) {
   getRepository(User)
@@ -11,12 +13,14 @@ router.get("/", function (req, res) {
     });
 });
 
-router.post("/new", function (req, res) {
+router.post("/new", async function (req, res) {
   const userRepository = getRepository(User);
+  const pwd_hash = await bcrypt.hash(req.body.password, 10);
   const newUser = userRepository.create({
     email: req.body.email,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    pwd_hash: pwd_hash,
   });
 
   userRepository
@@ -36,13 +40,46 @@ router.post("/new", function (req, res) {
     });
 });
 
+router.post("/login", function (req, res) {
+  const userRepository = getRepository(User);
+  userRepository
+    .findOne({ email: req.body.email })
+    .then((user) => {
+      if (!user) {
+        res.status(401).json({ message: "Unknown account" });
+      }
+      bcrypt
+        .compare(req.body.password, user.pwd_hash)
+        .then((valid) => {
+          if (!valid) {
+            res.status(401).json({ message: "Wrong password" });
+          }
+          res.status(200).json({
+            userId: user.id,
+            token: jwt.sign({ userId: user.id }, "SECRETKEYDELAFLEMME", {
+              expiresIn: "24h",
+            }),
+          });
+        })
+        .catch((error) => {
+          res.status(500).json({ message: "error on compare" });
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      res.status(500).json({ message: "error on login" });
+      console.log(error);
+    });
+});
+
 router.delete("/delete/:userId", function (req, res) {
   getRepository(User)
     .delete({ id: req.params.userId })
     .then(function () {
       res.status(204).json({ message: "User successfully deleted" });
     })
-    .catch(function () {
+    .catch(function (error) {
+      console.log(error);
       res.status(500).json({ message: "Error while deleting the user" });
     });
 });
