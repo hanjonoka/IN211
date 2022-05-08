@@ -78,6 +78,7 @@ function MovieComments(props) {
           <div className="comment" key={c.user_id}>
             <div className="comment-name">{c.firstname + ' ' + c.lastname}</div>
             <div className="comment-mark">{c.mark}</div>
+            <div className="comment-text">{c.text}</div>
           </div>
         ))}
       </div>

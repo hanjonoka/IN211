@@ -25,7 +25,7 @@ const Movie = new typeorm.EntitySchema({
       unique: false,
     },
     mean_mark: {
-      type: "int",
+      type: "float",
       nullable: false,
       default: -1,
     },

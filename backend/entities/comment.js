@@ -20,6 +20,10 @@ const Comment = new typeorm.EntitySchema({
       type: "uuid",
       nullable: false,
     },
+    text: {
+      type: "text",
+      nullable: true,
+    },
   },
   checks: [{ expression: `"mark" >= 0 AND "mark" <= 5` }],
 });

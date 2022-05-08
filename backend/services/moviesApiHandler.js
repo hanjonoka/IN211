@@ -99,6 +99,7 @@ const addComment = async function (req, res) {
     mark: req.body.mark,
     user_id: req.body.user_id,
     movie_id: req.body.movie_id,
+    text: req.body.comment,
   });
 
   let comments = await commentRepository
@@ -121,9 +122,9 @@ const addComment = async function (req, res) {
         .select("*")
         .where("movie_id = :movie_id", { movie_id: req.body.movie_id })
         .execute();
-      let mean = 0;
+      let mean = 0.0;
       comments.map((c) => {
-        mean += parseInt(c.mark);
+        mean += parseFloat(c.mark);
       });
       mean /= comments.length;
       getRepository(Movie)
