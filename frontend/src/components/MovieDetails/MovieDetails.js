@@ -12,6 +12,13 @@ function MovieDetails(props) {
         {' '}
         Release date : {props.movie.release_date}{' '}
       </div>
+      {props.movie.mean_mark && props.movie.mean_mark >= 0 ? (
+        <div className="header-modal-details">
+          Note : {props.movie.mean_mark}
+        </div>
+      ) : (
+        ''
+      )}
       <div className="content-modal-details"> {props.movie.overview}</div>
       <MovieComments className="content-modal-details" movie={props.movie} />
       <div className="actions-modal-details">

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
+import './MovieComments.css';
 
 const useSaveComment = () => {
   const [commentCreationError, setCommentCreationError] = useState(null);
@@ -52,21 +53,6 @@ const getComments = function (movie_id, setComments) {
     });
 };
 
-const getUser = function (user_id) {
-  axios
-    .get(`${process.env.REACT_APP_BACKEND_URL}/users/getById?id=${user_id}`)
-    .then((response) => {
-      console.log(response.data);
-
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-
-      return '';
-    });
-};
-
 function MovieComments(props) {
   const [cookies, setCookie, removeCookie] = useCookies();
 
@@ -97,15 +83,16 @@ function MovieComments(props) {
       </div>
       <form
         className="add-comment-form"
-        onSubmit={(event) =>
+        onSubmit={(event) => {
           saveComment(
             event,
             formValues,
             setFormValues,
             DEFAULT_FORM_VALUES,
             cookies
-          )
-        }
+          );
+          getComments(props.movie.id, setComments);
+        }}
       >
         <input
           type="text"

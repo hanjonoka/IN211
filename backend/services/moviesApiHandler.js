@@ -103,18 +103,36 @@ const addComment = async function (req, res) {
 
   let comments = await commentRepository
     .createQueryBuilder()
-    .select()
-    .where("movie_id = :movie_id", { movie_id: req.query.movie_id })
-    .andWhere("user_id = :user_id", { user_id: req.query.user_id })
+    .where("movie_id = :movie_id", { movie_id: req.body.movie_id })
+    .andWhere("user_id = :user_id", { user_id: req.body.user_id })
     .getMany();
+  console.log(comments.length);
   if (comments.length > 0) {
     res.status(500).json({ message: "already commented" });
+    return;
   }
 
   commentRepository
     .insert(newComment)
-    .then(function (newDocument) {
+    .then(async function (newDocument) {
       res.status(201).json(newDocument);
+      let comments = await commentRepository
+        .createQueryBuilder()
+        .select("*")
+        .where("movie_id = :movie_id", { movie_id: req.body.movie_id })
+        .execute();
+      let mean = 0;
+      comments.map((c) => {
+        mean += parseInt(c.mark);
+      });
+      mean /= comments.length;
+      getRepository(Movie)
+        .createQueryBuilder()
+        .update({ mean_mark: mean })
+        .where("id = :id", { id: req.body.movie_id })
+        .execute();
+
+      console.log(mean);
     })
     .catch(function (error) {
       console.log(error);

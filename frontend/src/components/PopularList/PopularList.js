@@ -6,8 +6,8 @@ import './PopularList.css';
 import MovieList from '../MovieList/MovieList';
 
 const DEFAULT_FORM_VALUES = {
-  field: 'title',
-  order: 'ASC',
+  field: 'mean_mark',
+  order: 'DSC',
   offset: 0,
   limit: 10,
 };
@@ -45,6 +45,7 @@ function PopularList() {
           >
             <option value="title">Titre</option>
             <option value="release_date">Date</option>
+            <option value="mean_mark">Note</option>
           </select>
         </label>
         <select

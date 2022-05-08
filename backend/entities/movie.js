@@ -24,13 +24,10 @@ const Movie = new typeorm.EntitySchema({
       type: String,
       unique: false,
     },
-  },
-  relations: {
-    comments: {
-      type: "one-to-many",
-      target: "comment",
-      cascade: true,
-      inverseSide: "movie",
+    mean_mark: {
+      type: "int",
+      nullable: false,
+      default: -1,
     },
   },
 });

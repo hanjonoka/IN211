@@ -60,12 +60,14 @@ router.post("/login", function (req, res) {
     .then((user) => {
       if (!user) {
         res.status(401).json({ message: "Unknown account" });
+        return;
       }
       bcrypt
         .compare(req.body.password, user.pwd_hash)
         .then((valid) => {
           if (!valid) {
             res.status(401).json({ message: "Wrong password" });
+            return;
           }
           res.status(200).json({
             userId: user.id,
@@ -77,11 +79,13 @@ router.post("/login", function (req, res) {
         .catch((error) => {
           res.status(500).json({ message: "error on compare" });
           console.log(error);
+          return;
         });
     })
     .catch((error) => {
       res.status(500).json({ message: "error on login" });
       console.log(error);
+      return;
     });
 });
 
